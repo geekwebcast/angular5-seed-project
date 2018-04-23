@@ -9,6 +9,9 @@ import { CoreModuleRoutingModule } from '@app/core-module/core-module-routing.mo
     CommonModule,
     CoreModuleRoutingModule
   ],
+  exports: [
+    CoreModuleModule
+  ],
   declarations: []
 })
 export class CoreModuleModule { }
