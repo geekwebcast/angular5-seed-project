@@ -10,6 +10,7 @@ import { RegisterComponent } from '@app/core/auth/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '@app/core/auth/auth.service';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,7 +22,8 @@ export const authRouter = RouterModule.forChild(routes );
 @NgModule({
     imports: [
       authRouter,
-      FormsModule
+      FormsModule,
+      SweetAlert2Module
     ],
     declarations: [
       AuthComponent,
@@ -31,7 +33,7 @@ export const authRouter = RouterModule.forChild(routes );
     ],
     providers: [AuthService],
     exports: [
-      RouterModule
+      RouterModule,SweetAlert2Module
     ]
 })
 export class AuthModule {

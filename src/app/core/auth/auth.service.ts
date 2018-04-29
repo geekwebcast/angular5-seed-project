@@ -7,7 +7,6 @@ export class AuthService {
 
   }
   login(loginData) {
-    debugger;
     return this.httpClient.post("login", loginData);
   }
 }

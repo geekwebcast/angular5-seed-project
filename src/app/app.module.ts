@@ -8,6 +8,10 @@ import { CoreModule } from '@app/core/core.module';
 import { FormsModule} from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppInterceptor } from '@app/utill/interceptors/http-interceptor';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -16,17 +20,19 @@ import { AppInterceptor } from '@app/utill/interceptors/http-interceptor';
   imports: [
     BrowserModule,
     appRouter,
-    CoreModule,
     SharedModuleModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SweetAlert2Module.forRoot(),
+    ToastModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [HttpClient,{
     provide: HTTP_INTERCEPTORS,
     useClass: AppInterceptor,
     multi: true
   }],
-  exports: [FormsModule],
+  exports: [FormsModule,SweetAlert2Module],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
