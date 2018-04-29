@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  API_ENDPOINT: 'https://dev.perfomatix.online/api/'
+  API_ENDPOINT: 'https://reqres.in/api/'
 };

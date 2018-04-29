@@ -5,6 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModuleModule } from '@app/shared-module/shared-module.module';
 import { appRouter } from '@app/app.router';
 import { CoreModule } from '@app/core/core.module';
+import { FormsModule} from '@angular/forms';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppInterceptor } from '@app/utill/interceptors/http-interceptor';
 
 @NgModule({
   declarations: [
@@ -14,9 +17,16 @@ import { CoreModule } from '@app/core/core.module';
     BrowserModule,
     appRouter,
     CoreModule,
-    SharedModuleModule
+    SharedModuleModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClient,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AppInterceptor,
+    multi: true
+  }],
+  exports: [FormsModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
