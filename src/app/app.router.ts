@@ -4,9 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 export const router: Routes = [
     {
         path: '',
-        loadChildren: 'app/core/core.module#CoreModule',
+        redirectTo:'core',
         pathMatch: 'full'
-    }
+    },
+    {
+        path: 'core',
+        loadChildren: 'app/core/core.module#CoreModule'
+    },
+    { path: 'feature', loadChildren: 'app/feature/feature.module#FeatureModule'},
 ];
 
 export const appRouter: ModuleWithProviders = RouterModule.forRoot(router, { useHash: true });

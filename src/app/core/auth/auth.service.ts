@@ -7,6 +7,6 @@ export class AuthService {
 
   }
   login(loginData) {
-    return this.httpClient.post("/login", loginData);
+    return this.httpClient.post("login", loginData);
   }
 }

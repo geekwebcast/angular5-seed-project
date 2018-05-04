@@ -5,12 +5,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { environment } from '@env/environment';
+import { LoaderService } from '@app/shared-module/sharedServices/loader.service';
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
-  constructor() { }
+  constructor(public loaderService: LoaderService) {
+
+  }
   // get api end proints from angular environment file
   private apiUrl = environment.API_ENDPOINT;
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    //start loader
+    this.showLoader();
     // Assume your authorization token is aleady saved in localstorage
     // tslint:disable-next-line:prefer-const
     let token = localStorage.getItem('token') === undefined ? '' : localStorage.getItem('token');
@@ -32,12 +37,14 @@ export class AppInterceptor implements HttpInterceptor {
       url: `${this.apiUrl}${req.url}`,
     });
     return next.handle(req).do(event => {
+      this.hideLoader();
       // place for handling web app logger
       if (event instanceof HttpResponse) {
         // this.logger.logDebug(event);
       }
     })
       .catch(err => {
+        this.hideLoader();
         // Handle Unauthorized Responses
         if (err.status === 401) {
           this.logout();
@@ -49,5 +56,15 @@ export class AppInterceptor implements HttpInterceptor {
   logout() {
     // clear the local storage and navigate to login page
     localStorage.clear();
+  }
+
+  private showLoader(): void {
+    this.loaderService.display(true);
+  }
+
+  private hideLoader(): void {
+    setTimeout(() => {
+      this.loaderService.display(false);
+  }, 1000);
   }
 }

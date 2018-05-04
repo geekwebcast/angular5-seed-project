@@ -2,30 +2,34 @@
 import { NgModule } from '@angular/core';
 
 // This Module's Components
-import { AuthComponent } from './auth.component';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from '@app/core/auth/login/login.component';
-import { ResetPasswordComponent } from '@app/core/auth/reset-password/reset-password.component';
-import { RegisterComponent } from '@app/core/auth/register/register.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import * as authBarrel from ".";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  {path: 'signup', component: RegisterComponent},
-  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'login', component: authBarrel.LoginComponent },
+  { path: 'signup', component: authBarrel.RegisterComponent },
+  { path: 'reset-password', component: authBarrel.ResetPasswordComponent },
 ];
 export const authRouter = RouterModule.forChild(routes );
 @NgModule({
     imports: [
-      authRouter
+      authRouter,
+      FormsModule,
+      SweetAlert2Module
     ],
     declarations: [
-      LoginComponent,
-      ResetPasswordComponent,
-      RegisterComponent
+      authBarrel.AuthComponent,
+      authBarrel.LoginComponent,
+      authBarrel.ResetPasswordComponent,
+      authBarrel.RegisterComponent
     ],
+    providers: [authBarrel.AuthService],
     exports: [
-      RouterModule
+      RouterModule,SweetAlert2Module
     ]
 })
 export class AuthModule {
