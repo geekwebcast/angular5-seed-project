@@ -16,7 +16,6 @@ export class LoginComponent {
         this.toastr.setRootViewContainerRef(vcr);
     }
     login(data){
-      debugger;
       let dummy={
         "email": "peter@klavekn",
         "password": "cityslicka"

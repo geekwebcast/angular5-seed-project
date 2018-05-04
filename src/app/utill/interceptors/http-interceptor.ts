@@ -14,7 +14,6 @@ export class AppInterceptor implements HttpInterceptor {
   // get api end proints from angular environment file
   private apiUrl = environment.API_ENDPOINT;
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    debugger;
     //start loader
     this.showLoader();
     // Assume your authorization token is aleady saved in localstorage
