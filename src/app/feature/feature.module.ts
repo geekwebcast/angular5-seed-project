@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
-
+import * as featureBarrel from '.';
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: featureBarrel.HomeComponent },
+  { path: 'home', component: featureBarrel.HomeComponent },
   { path: 'feature', loadChildren: 'app/feature/feature.module#FeatureModule'},
 ];
 
@@ -14,7 +13,7 @@ const routes: Routes = [
     CommonModule,RouterModule.forChild(routes)
   ],
   declarations: [
-    HomeComponent
+    featureBarrel.HomeComponent
 ],
 exports: [RouterModule]
 })
